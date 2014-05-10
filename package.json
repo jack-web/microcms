@@ -1,0 +1,22 @@
+{
+  "name": "microcms",
+  "description": "Micro CMS",
+  "homepage": "http://microcms.jackweb.ru",
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jack-web/microcms.git"
+  },
+  "main": "./lib/app.js",
+  "readme": "Micro CMS",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "mongoose": "3.8.9",
+    "express": "4.1.2"
+  },
+  "keywords": [
+    "microcms",
+    "micro",
+    "cms"
+  ]
+}
