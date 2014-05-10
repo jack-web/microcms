@@ -85,13 +85,20 @@
         </div>
     </div>
 </div>
+<script type=text/ng-template id=partial1.html>
 
-<script src="/components/jquery/dist/jquery.js"></script>
-<script src="/components/angular/angular.min.js"></script>
-<script src="/components/angular-route/angular-route.min.js"></script>
-<script src="/components/angular-resource/angular-resource.min.js"></script>
-<script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/admin/js/app.js"></script>
-<script src="/admin/js/controllers/accounts.js"></script>
+<div class="page-header">
+    <h1>{{page}} ! Example page header
+        <small>Subtext for header</small>
+    </h1>
+</div>
+</script>
+<script src="/components.js"></script>
+<script src="/common/resources/AccountResource.js"></script>
+<script src="/admin/controllers/accounts.js"></script>
+<script src="/admin/controllers/content.js"></script>
+<script src="/admin/app.js"></script>
+
+
 </body>
 </html>

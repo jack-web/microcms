@@ -4,4 +4,8 @@
     $locationProvider.hashPrefix('!');
     $.ajaxSetup({ cache: false });
   });
-})(angular.module('app', ['ngResource', 'ngRoute']));
+})(angular.module('app', [
+  'ngRoute',
+  'admin.controllers.accounts',
+  'admin.controllers.content'
+]));
