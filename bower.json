@@ -1,0 +1,12 @@
+{
+  "name": "microcms",
+
+  "dependencies": {
+    "angular":"latest",
+    "angular-route":"latest",
+    "angular-resource":"latest",
+    "underscore":"latest",
+    "jquery":"latest",
+    "bootstrap":"latest"
+  }
+}
