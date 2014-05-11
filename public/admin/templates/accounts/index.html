@@ -1,3 +1,23 @@
 <div class="page-header">
-    <h1>{{page}} ! Example page header <small>Subtext for header</small> </h1>
+    <h1>Accounts
+        <small>system account management</small>
+    </h1>
 </div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>
+            Login
+        </th>
+        <th>
+            CreateDate
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in model">
+            <td>{{row.login}}</td>
+            <td>{{row.createDate}}</td>
+        </tr>
+    </tbody>
+</table>

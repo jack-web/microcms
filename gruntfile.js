@@ -3,14 +3,23 @@
  */
 module.exports = function(grunt) {
   grunt.initConfig({
+    watch: {
+      files: 'public/common/**/*.js',
+      tasks: ['concat:common', 'uglify:common']
+    },
     uglify: {
       options:{
         sourceMap:true
       },
-      build: {
-        src: 'public/components.js',
-        dest: 'public/components.min.js'
-
+      components:{
+        files: {
+          'public/components.min.js': ['public/components.js']
+        }
+      },
+      common:{
+        files: {
+          'public/common.min.js': ['public/common.js']
+        }
       }
     },
     concat: {
@@ -22,14 +31,20 @@ module.exports = function(grunt) {
           'public/components/angular/angular.js',
           'public/components/angular-resource/angular-resource.js',
           'public/components/angular-route/angular-route.js',
-
         ],
         dest: 'public/components.js'
+      },
+      common: {
+        src: [
+          'public/common/**/*.js',
+        ],
+        dest: 'public/common.js'
       }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   // Default task(s).
-  grunt.registerTask('default', ['concat:components', 'uglify']);
+  grunt.registerTask('default', ['concat', 'uglify']);
 };

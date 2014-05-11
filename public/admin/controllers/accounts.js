@@ -2,14 +2,13 @@
 
   module.config(function ($routeProvider) {
     $routeProvider
-      .when('/accounts', { templateUrl: 'partial1.html', controller: indexCtrl});
+      .when('/accounts', { templateUrl: '/admin/templates/accounts/index.html', controller: indexCtrl});
   });
-  var indexCtrl = function ($scope, $http, AccountResource) {
-    AccountResource.query().$promise.then(function(accs){
-      console.log(accs);
-      $scope.page='Accounts';
+  var indexCtrl = function ($scope, $http, accountRes) {
+    accountRes.query({fields:['login', 'createDate']}).$promise.then(function(accs){
+      $scope.model=accs;
     });
-  }
+  };
 })(angular.module('admin.controllers.accounts',[
-  'common.resources.AccountResource'
+  'common.resources.accountRes'
 ]));

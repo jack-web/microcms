@@ -1,6 +1,6 @@
 # IDE settings
 .idea
-
+public/components
 # Logs
 logs
 *.log
