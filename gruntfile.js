@@ -1,11 +1,49 @@
 /**
  * Created by vs on 10.05.2014.
  */
+
+
+var src = {
+  components:[
+    'bower_components/jquery/dist/jquery.js',
+    'bower_components/underscore/jquery.js',
+    'bower_components/bootstrap/js/alert.js',
+    'bower_components/bootstrap/js/dropdown.js',
+    'bower_components/angular/angular.js',
+    'bower_components/angular-resource/angular-resource.js',
+    'bower_components/angular-route/angular-route.js'
+  ],
+  common: [
+    'public/common/**/*.js'
+  ]
+}
+
 module.exports = function(grunt) {
   grunt.initConfig({
+    less : {
+      components: {
+        options: {
+          modifyVars: {
+            'icon-font-path': '"http://mycdn.com/path/to/images"'
+          }
+        },
+        files: {
+          "build/bootstrap.css": [
+            "bower_components/bootstrap/less/bootstrap.less"
+            ]
+        }
+      }
+    },
     watch: {
       files: 'public/common/**/*.js',
       tasks: ['concat:common', 'uglify:common']
+    },
+    cssmin:{
+      components:{
+        files: {
+          'public/components.min.css': ['build/bootstrap.css']
+        }
+      }
     },
     uglify: {
       options:{
@@ -13,38 +51,33 @@ module.exports = function(grunt) {
       },
       components:{
         files: {
-          'public/components.min.js': ['public/components.js']
+          'public/components.min.js': ['build/components.js']
         }
       },
       common:{
         files: {
-          'public/common.min.js': ['public/common.js']
+          'public/common.min.js': ['build/common.js']
         }
       }
     },
     concat: {
       components: {
-        src: [
-          'public/components/jquery/dist/jquery.js',
-          'public/components/underscore/jquery.js',
-          'public/components/bootstrap/dist/js/bootstrap.js',
-          'public/components/angular/angular.js',
-          'public/components/angular-resource/angular-resource.js',
-          'public/components/angular-route/angular-route.js',
-        ],
-        dest: 'public/components.js'
+        src: src.components,
+        dest: 'build/components.js'
       },
       common: {
-        src: [
-          'public/common/**/*.js',
-        ],
-        dest: 'public/common.js'
+        src: src.common,
+        dest: 'build/common.js'
       }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   // Default task(s).
-  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components']);
+  grunt.registerTask('appComon', ['concat:common', 'uglify:common']);
+  grunt.registerTask('default', ['components', 'appComon']);
 };
