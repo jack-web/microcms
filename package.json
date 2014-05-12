@@ -25,7 +25,9 @@
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch":"latest",
     "grunt-contrib-less" : "latest",
-    "grunt-contrib-cssmin" : "latest"
+    "grunt-contrib-cssmin" : "latest",
+    "grunt-contrib-copy" : "latest",
+    "grunt-contrib-clean" : "latest"
   },
   "keywords": [
     "microcms",

@@ -24,13 +24,13 @@ module.exports = function(grunt) {
       components: {
         options: {
           modifyVars: {
-            'icon-font-path': '"http://mycdn.com/path/to/images"'
+            'icon-font-path': '"/fonts/"',
+            'fa-font-path':'"/fonts/"'
           }
         },
         files: {
-          "build/bootstrap.css": [
-            "bower_components/bootstrap/less/bootstrap.less"
-            ]
+          "build/bootstrap.css":  "bower_components/bootstrap/less/bootstrap.less",
+          'build/fontawesome.css': 'bower_components/fontawesome/less/font-awesome.less'
         }
       }
     },
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     cssmin:{
       components:{
         files: {
-          'public/components.min.css': ['build/bootstrap.css']
+          'public/components.min.css': ['build/bootstrap.css','build/fontawesome.css']
         }
       }
     },
@@ -69,15 +69,26 @@ module.exports = function(grunt) {
         src: src.common,
         dest: 'build/common.js'
       }
-    }
+    },
+    copy:{
+      components:{
+        files:[
+          {expand:true, src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true},
+          {expand:true, src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true}
+        ]
+      }
+    },
+    clean: ["build"]
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   // Default task(s).
-  grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components']);
-  grunt.registerTask('appComon', ['concat:common', 'uglify:common']);
+  grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components', 'clean']);
+  grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'clean']);
   grunt.registerTask('default', ['components', 'appComon']);
 };
