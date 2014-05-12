@@ -4,7 +4,7 @@
 
 
 var src = {
-  components:[
+  components: [
     'bower_components/jquery/dist/jquery.js',
     'bower_components/underscore/jquery.js',
     'bower_components/bootstrap/js/alert.js',
@@ -16,47 +16,56 @@ var src = {
   common: [
     'public/common/**/*.js'
   ]
-}
+};
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+  'use strict';
   grunt.initConfig({
-    less : {
+    less: {
       components: {
         options: {
           modifyVars: {
             'icon-font-path': '"/fonts/"',
-            'fa-font-path':'"/fonts/"'
+            'fa-font-path': '"/fonts"'
           }
         },
         files: {
-          "build/bootstrap.css":  "bower_components/bootstrap/less/bootstrap.less",
+          "build/bootstrap.css": "bower_components/bootstrap/less/bootstrap.less",
           'build/fontawesome.css': 'bower_components/fontawesome/less/font-awesome.less'
         }
       }
     },
     watch: {
-      files: 'public/common/**/*.js',
-      tasks: ['concat:common', 'uglify:common']
+      files: ['public/common/**/*.js', 'public/admin/**/*.js'],
+      tasks: ['appComon', 'appAdmin']
     },
-    cssmin:{
-      components:{
+    cssmin: {
+      components: {
         files: {
-          'public/components.min.css': ['build/bootstrap.css','build/fontawesome.css']
+          'build/components.min.css': ['build/bootstrap.css', 'build/fontawesome.css']
         }
       }
     },
     uglify: {
-      options:{
-        sourceMap:true
+      options: {
+        sourceMap: true
       },
-      components:{
+      components: {
         files: {
-          'public/components.min.js': ['build/components.js']
+          'build/components.min.js': ['build/components.js']
         }
       },
-      common:{
+      common: {
         files: {
-          'public/common.min.js': ['build/common.js']
+          'build/common.min.js': ['build/common.js']
+        }
+      },
+      admin: {
+        options: {
+          mangle: false
+        },
+        files: {
+          'build/admin.min.js': ['build/admin.js']
         }
       }
     },
@@ -68,13 +77,32 @@ module.exports = function(grunt) {
       common: {
         src: src.common,
         dest: 'build/common.js'
+      },
+      admin: {
+        files: {
+          'build/admin.js': ['public/admin/controllers/**/*.js', 'public/admin/app.js'],
+        }
       }
     },
-    copy:{
-      components:{
-        files:[
-          {expand:true, src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true},
-          {expand:true, src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true}
+    copy: {
+      components: {
+        files: [
+          {src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true},
+          {src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true}
+        ]
+      },
+      admin: {
+        files: [
+          {src: ['build/admin.js'], dest: 'public/admin.js', filter: 'isFile', flatten: true},
+          {src: ['build/admin.min.js'], dest: 'public/admin.min.js', filter: 'isFile', flatten: true},
+          {src: ['build/admin.min.map'], dest: 'public/admin.min.map', filter: 'isFile', flatten: true}
+        ]
+      },
+      common: {
+        files: [
+          {src: ['build/common.js'], dest: 'public/common.js', filter: 'isFile', flatten: true},
+          {src: ['build/common.min.js'], dest: 'public/common.min.js', filter: 'isFile', flatten: true},
+          {src: ['build/common.min.map'], dest: 'public/common.min.map', filter: 'isFile', flatten: true}
         ]
       }
     },
@@ -88,7 +116,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // Default task(s).
-  grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components', 'clean']);
-  grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'clean']);
-  grunt.registerTask('default', ['components', 'appComon']);
+  grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components']);
+  grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'copy:common']);
+  grunt.registerTask('appAdmin', ['concat:admin', 'uglify:admin', 'copy:admin']);
+  grunt.registerTask('default', ['components', 'appComon', 'appAdmin']);
 };
