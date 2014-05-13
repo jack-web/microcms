@@ -87,6 +87,9 @@ module.exports = function (grunt) {
     copy: {
       components: {
         files: [
+          {src: ['build/components.js'], dest: 'public/components.js', filter: 'isFile', flatten: true},
+          {src: ['build/components.min.js'], dest: 'public/components.min.js', filter: 'isFile', flatten: true},
+          {src: ['build/components.min.map'], dest: 'public/components.min.map', filter: 'isFile', flatten: true},
           {src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true},
           {src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true}
         ]

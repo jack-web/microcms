@@ -1,7 +1,10 @@
-(function (module) {'use strict';
+(function (angular) {
+  'use strict';
+  var module = angular.module('common.resources.accountRes', ['ngResource']);
+
   module.factory('accountRes', ['$resource', function ($resource) {
-    return $resource('/api/accounts/:_id', {_id: '@_id'});
+    return $resource('/api/accounts/:_id', {
+      _id: '@_id'
+    });
   }]);
-})(angular.module('common.resources.accountRes', [
-  'ngResource'
-]));
+})(window.angular);
