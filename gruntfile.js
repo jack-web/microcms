@@ -6,7 +6,7 @@
 var src = {
   components: [
     'bower_components/jquery/dist/jquery.js',
-    'bower_components/underscore/jquery.js',
+    'bower_components/underscore/underscore.js',
     'bower_components/bootstrap/js/alert.js',
     'bower_components/bootstrap/js/dropdown.js',
     'bower_components/angular/angular.js',
@@ -114,14 +114,21 @@ module.exports = function (grunt) {
     },
 
     clean: ["build", 'public'],
-    ngtemplates:{
-      app:{
-        options:  {
-          htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
-          url:    function(url) { return url.replace('lib/client', ''); }
+    ngtemplates: {
+      app: {
+        options: {
+          htmlmin: { collapseWhitespace: true, collapseBooleanAttributes: true },
+          url: function (url) { return url.replace('lib/client', ''); }
         },
         src: 'lib/client/admin/templates/**/*.html',
         dest: 'build/admin-templates.js'
+      }
+    },
+    nggettext_compile: {
+      ru_RU: {
+        files: {
+          'public/translations.js': ['lib/common/i18n/ru_RU.po']
+        }
       }
     }
   });
@@ -133,6 +140,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-angular-gettext');
   // Default task(s).
   grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components']);
   grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'copy:common']);

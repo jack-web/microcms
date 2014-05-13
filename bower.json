@@ -5,6 +5,7 @@
     "angular":"latest",
     "angular-route":"latest",
     "angular-resource":"latest",
+    "angular-gettext" : "latest",
     "underscore":"latest",
     "jquery":"latest",
     "bootstrap":"latest",

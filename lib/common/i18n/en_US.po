@@ -1,0 +1,5 @@
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Guest"
+msgstr "Guest"
