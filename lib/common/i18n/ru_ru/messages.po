@@ -1,5 +1,0 @@
-msgid "Administrator"
-msgstr "Администратор"
-
-msgid "Guest"
-msgstr "Гость"

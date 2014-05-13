@@ -11,7 +11,8 @@ var src = {
     'bower_components/bootstrap/js/dropdown.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-resource/angular-resource.js',
-    'bower_components/angular-route/angular-route.js'
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-gettext/dist/angular-gettext.js'
   ]
 };
 
@@ -125,9 +126,9 @@ module.exports = function (grunt) {
       }
     },
     nggettext_compile: {
-      ru_RU: {
+      all: {
         files: {
-          'public/translations.js': ['lib/common/i18n/ru_RU.po']
+          'public/translations.js': ['lib/common/i18n/*.po']
         }
       }
     }
