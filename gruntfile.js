@@ -12,9 +12,6 @@ var src = {
     'bower_components/angular/angular.js',
     'bower_components/angular-resource/angular-resource.js',
     'bower_components/angular-route/angular-route.js'
-  ],
-  common: [
-    'public/common/**/*.js'
   ]
 };
 
@@ -36,7 +33,7 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      files: ['public/common/**/*.js', 'public/admin/**/*.js'],
+      files: ['lib/client/**/*.js'],
       tasks: ['appComon', 'appAdmin']
     },
     cssmin: {
@@ -75,27 +72,33 @@ module.exports = function (grunt) {
         dest: 'build/components.js'
       },
       common: {
-        src: src.common,
+        src: ['lib/client/common/**/*.js'],
         dest: 'build/common.js'
       },
       admin: {
         files: {
-          'build/admin.js': ['public/admin/controllers/**/*.js', 'public/admin/app.js'],
+          'build/admin.js': [
+            'lib/client/admin/controllers/**/*.js',
+            'lib/client/admin/app.js',
+            'build/admin-templates.js'
+          ]
         }
       }
     },
     copy: {
       components: {
         files: [
+          {src: ['build/components.min.css'], dest: 'public/components.min.css', filter: 'isFile', flatten: true},
           {src: ['build/components.js'], dest: 'public/components.js', filter: 'isFile', flatten: true},
           {src: ['build/components.min.js'], dest: 'public/components.min.js', filter: 'isFile', flatten: true},
           {src: ['build/components.min.map'], dest: 'public/components.min.map', filter: 'isFile', flatten: true},
-          {src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true},
-          {src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', flatten: true}
+          {src: ['bower_components/bootstrap/fonts/*'], dest: 'public/fonts/', filter: 'isFile', expand: true, flatten: true},
+          {src: ['bower_components/fontawesome/fonts/*'], dest: 'public/fonts/', filter: 'isFile', expand: true, flatten: true}
         ]
       },
       admin: {
         files: [
+          {src: ['lib/client/admin/index.html'], dest: 'public/admin/index.html', filter: 'isFile', flatten: true},
           {src: ['build/admin.js'], dest: 'public/admin.js', filter: 'isFile', flatten: true},
           {src: ['build/admin.min.js'], dest: 'public/admin.min.js', filter: 'isFile', flatten: true},
           {src: ['build/admin.min.map'], dest: 'public/admin.min.map', filter: 'isFile', flatten: true}
@@ -109,7 +112,18 @@ module.exports = function (grunt) {
         ]
       }
     },
-    clean: ["build"]
+
+    clean: ["build", 'public'],
+    ngtemplates:{
+      app:{
+        options:  {
+          htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
+          url:    function(url) { return url.replace('lib/client', ''); }
+        },
+        src: 'lib/client/admin/templates/**/*.html',
+        dest: 'build/admin-templates.js'
+      }
+    }
   });
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -118,9 +132,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-angular-templates');
   // Default task(s).
   grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components']);
   grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'copy:common']);
-  grunt.registerTask('appAdmin', ['concat:admin', 'uglify:admin', 'copy:admin']);
+  grunt.registerTask('appAdmin', ['ngtemplates:app', 'concat:admin', 'uglify:admin', 'copy:admin']);
   grunt.registerTask('default', ['components', 'appComon', 'appAdmin']);
 };
