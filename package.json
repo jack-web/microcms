@@ -15,9 +15,9 @@
     "express": "4.1.2",
     "bunyan": "0.22.3",
     "underscore": "1.6.0",
-    "body-parser": "1.0.2",
+    "body-parser": "1.2.0",
     "response-time": "1.0.0",
-    "i18n-abide":"0.0.10"
+    "i18n-abide":"0.0.20"
   },
   "devDependencies": {
     "grunt": "latest",
