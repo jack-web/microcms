@@ -7,12 +7,10 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="microcms node_modules" level="project" />
-    <orderEntry type="library" name="Node.js v0.10.24 Core Modules" level="application" />
-    <orderEntry type="library" name="underscore-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="angularjs-DefinitelyTyped" level="project" />
-    <orderEntry type="library" name="express-DefinitelyTyped" level="project" />
     <orderEntry type="library" name="mongoose-DefinitelyTyped" level="project" />
-    <orderEntry type="library" name="Node.js v0.10.28 Core Modules" level="project" />
+    <orderEntry type="library" name="Node.js v0.10.24 Core Modules" level="project" />
+    <orderEntry type="library" name="underscore-DefinitelyTyped" level="project" />
   </component>
 </module>
 

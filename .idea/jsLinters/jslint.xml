@@ -6,7 +6,7 @@
     <option maxerr="50" />
     <option node="true" />
     <option nomen="true" />
-    <option predef="angular" />
+    <option predef="window" />
     <option vars="true" />
   </component>
 </project>

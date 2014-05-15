@@ -3,7 +3,7 @@
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$/lib/client" libraries="{HTML, HTML5 / EcmaScript 5, angularjs-DefinitelyTyped, underscore-DefinitelyTyped}" />
     <file url="file://$PROJECT_DIR$/lib/common" libraries="{underscore-DefinitelyTyped}" />
-    <file url="file://$PROJECT_DIR$/lib/server" libraries="{Node.js Globals, Node.js v0.10.28 Core Modules, express-DefinitelyTyped, microcms node_modules, mongoose-DefinitelyTyped, underscore-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/lib/server" libraries="{Node.js Globals, Node.js v0.10.24 Core Modules, microcms node_modules, mongoose-DefinitelyTyped, underscore-DefinitelyTyped}" />
     <excludedPredefinedLibrary name="HTML" />
     <excludedPredefinedLibrary name="HTML5 / EcmaScript 5" />
   </component>
