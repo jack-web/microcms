@@ -119,7 +119,9 @@ module.exports = function (grunt) {
       app: {
         options: {
           htmlmin: { collapseWhitespace: true, collapseBooleanAttributes: true },
-          url: function (url) { return url.replace('lib/client', ''); }
+          url: function (url) {
+            return url.replace('lib/client', '');
+          }
         },
         src: 'lib/client/admin/templates/**/*.html',
         dest: 'build/admin-templates.js'
@@ -128,7 +130,17 @@ module.exports = function (grunt) {
     nggettext_compile: {
       all: {
         files: {
-          'public/translations.js': ['lib/common/i18n/*.po']
+          'public/translations.js': ['lib/common/i18n/**/*.po']
+        }
+      }
+    },
+    abideCompile: {
+      json: {
+        dest: 'json',
+        options: {
+          createJSFiles: false,
+          type: 'json',
+          localeDir: 'lib/common/i18n'
         }
       }
     }
@@ -142,6 +154,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-angular-gettext');
+  grunt.loadNpmTasks('grunt-i18n-abide');
   // Default task(s).
   grunt.registerTask('components', ['concat:components', 'less:components', 'cssmin:components', 'uglify:components', 'copy:components']);
   grunt.registerTask('appComon', ['concat:common', 'uglify:common', 'copy:common']);

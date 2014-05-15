@@ -31,7 +31,8 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-clean": "latest",
     "grunt-angular-templates": "latest",
-    "grunt-angular-gettext": "latest"
+    "grunt-angular-gettext": "latest",
+    "grunt-i18n-abide":"latest"
   },
   "keywords": [
     "microcms",
