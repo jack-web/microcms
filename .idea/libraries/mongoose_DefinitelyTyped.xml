@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="mongoose-DefinitelyTyped" type="javaScript">
     <properties>
-      <option name="frameworkName" value="Node.js Core Modules" />
       <sourceFilesUrls>
         <item url="file://$USER_HOME$/.WebStorm8/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_mongoose_mongoose.d.ts" />
       </sourceFilesUrls>
